@@ -48,8 +48,7 @@ limitations under the License.
 		in addition to automatically detected dependencies.
 		The items are resolved relative to $(OutputPath)
 		-->
-		<PackageFiles Include="$(OutputPath)NHibernate.*" />
-		<PackageFiles Include="$(OutputPath)Iesi.*" />
+		<PackageFiles Include="$(OutputPath)NHibernate.*;$(OutputPath)Antlr3.*;$(OutputPath)Iesi.*" />
 	</ItemGroup>
 
 
