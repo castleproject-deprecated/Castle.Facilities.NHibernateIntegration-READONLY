@@ -82,15 +82,37 @@
             Augments the kernel to handle transactional components
             </summary>
         </member>
+        <member name="M:Castle.Facilities.AutoTx.TransactionFacility.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.AutoTx.TransactionFacility.#ctor(System.Boolean,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="allowAccessOutsideRootFolder"><see cref="P:Castle.Facilities.AutoTx.TransactionFacility.AllowAccessOutsideRootFolder"/></param>
+            <param name="rootFolder"></param>
+        </member>
         <member name="M:Castle.Facilities.AutoTx.TransactionFacility.Init">
             <summary>
             Registers the interceptor component, the metainfo store and
             adds a contributor to the ModelBuilder
             </summary>
         </member>
+        <member name="M:Castle.Facilities.AutoTx.TransactionFacility.Dispose">
+            <summary>
+            Disposes the facilitiy.
+            </summary>
+        </member>
         <member name="P:Castle.Facilities.AutoTx.TransactionFacility.AllowAccessOutsideRootFolder">
             <summary>
             This triggers a new file adapter / directory adapter to be created.
+            </summary>
+        </member>
+        <member name="P:Castle.Facilities.AutoTx.TransactionFacility.RootFolder">
+            <summary>
+            Gets or sets the root folder for file transactions.
             </summary>
         </member>
         <member name="T:Castle.Facilities.AutoTx.TransactionInterceptor">
@@ -159,12 +181,22 @@
             </summary>
             <param name="method"></param>
         </member>
+        <member name="M:Castle.Facilities.AutoTx.TransactionMetaInfo.Contains(System.Reflection.MethodInfo)">
+            <summary>
+            True if methods is transactional. Otherwise else
+            </summary>
+        </member>
         <member name="M:Castle.Facilities.AutoTx.TransactionMetaInfo.ShouldInject(System.Reflection.MethodInfo)">
             <summary>
             Gets whether the method should have its transaction injected.
             </summary>
             <param name="info">The method to inject for.</param>
             <returns>Whether to inject the transaction as a parameter into the method invocation.</returns>
+        </member>
+        <member name="M:Castle.Facilities.AutoTx.TransactionMetaInfo.GetTransactionAttributeFor(System.Reflection.MethodInfo)">
+            <summary>
+            Returns the transaction metadata for a given method.
+            </summary>
         </member>
         <member name="P:Castle.Facilities.AutoTx.TransactionMetaInfo.Methods">
             <summary>
@@ -175,6 +207,12 @@
             <summary>
             Pendent
             </summary>
+        </member>
+        <member name="M:Castle.Facilities.AutoTx.TransactionMetaInfoStore.InitializeLifetimeService">
+            <summary>
+            Overrides the MBRO Lifetime initialization
+            </summary>
+            <returns>Null</returns>
         </member>
         <member name="M:Castle.Facilities.AutoTx.TransactionMetaInfoStore.CreateMetaFromType(System.Type)">
             <summary>
