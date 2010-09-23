@@ -17,7 +17,7 @@
 						NHibernate.Driver.SqlClientDriver
 					</item>
 					<item key="connection.connection_string">
-						Data Source=.;Initial Catalog=test;Integrated Security=SSPI
+						Data Source=localhost;Initial Catalog=test;Integrated Security=SSPI
 					</item>
 					<item key="dialect">
 						NHibernate.Dialect.MsSql2000Dialect

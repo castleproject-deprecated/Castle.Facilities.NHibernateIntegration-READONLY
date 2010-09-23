@@ -162,7 +162,7 @@ namespace Castle.Facilities.NHibernateIntegration
 					transaction.Context["nh.session.enlisted"] = list;
 
 					IsolationLevel level = TranslateIsolationLevel(transaction.IsolationMode);
-					transaction.Enlist(new ResourceAdapter(session.BeginTransaction(level), transaction.IsAmbient));
+					transaction.Enlist(new ResourceAdapter(level, session, transaction.IsAmbient, transaction.IsReadOnly));
 
 					list.Add(session);
 				}

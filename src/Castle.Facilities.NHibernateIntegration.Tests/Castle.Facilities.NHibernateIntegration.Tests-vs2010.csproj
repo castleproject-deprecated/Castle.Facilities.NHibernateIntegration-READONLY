@@ -97,17 +97,19 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Facilities.AutoTx">
-      <Name>Castle.Facilities.AutoTx</Name>
-      <HintPath>..\..\lib\$(BuildConfigKey)\Castle.Facilities.AutoTx.dll</HintPath>
-    </Reference>
     <Reference Include="Castle.Core">
       <Name>Castle.Core</Name>
       <HintPath>..\..\lib\$(BuildConfigKey)\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Facilities.AutoTx">
+      <HintPath>..\..\lib\net40\Castle.Facilities.AutoTx.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Facilities.Logging, Version=2.5.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\$(BuildConfigKey)\Castle.Facilities.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Facilities.NHibernateIntegration">
+      <HintPath>..\Castle.Facilities.NHibernateIntegration\bin\Debug\Castle.Facilities.NHibernateIntegration.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Services.Logging.Log4netIntegration, Version=2.5.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -226,6 +228,7 @@
     <Compile Include="Transactions\Model\FirstDao2.cs" />
     <Compile Include="Transactions\Model\OrderDao.cs" />
     <Compile Include="Transactions\Model\OrderDao2.cs" />
+    <Compile Include="Transactions\Model\ReadOnlyTransactionsService.cs" />
     <Compile Include="Transactions\Model\RootService.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -234,6 +237,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Transactions\Model\SecondDao2.cs" />
+    <Compile Include="Transactions\ReadOnlyTransactionsTestCase.cs" />
     <Compile Include="Transactions\TransactionsTestCase.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -248,12 +252,6 @@
     <EmbeddedResource Include="Common\BlogItem.hbm.xml" />
     <EmbeddedResource Include="Common\BlogRef.hbm.xml" />
     <EmbeddedResource Include="Common\Order.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Castle.Facilities.NHibernateIntegration\Castle.Facilities.NHibernateIntegration-vs2010.csproj">
-      <Project>{A3135261-0009-4F9C-A339-2900143E20F0}</Project>
-      <Name>Castle.Facilities.NHibernateIntegration-vs2010</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

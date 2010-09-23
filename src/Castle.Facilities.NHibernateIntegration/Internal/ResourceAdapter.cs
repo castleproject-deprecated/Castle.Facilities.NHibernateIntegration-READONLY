@@ -20,8 +20,12 @@
 namespace Castle.Facilities.NHibernateIntegration.Internal
 {
 	using System;
+    using System.Data;
 	using Services.Transaction;
+    using NHibernate;
 	using ITransaction = NHibernate.ITransaction;
+    
+    
 
 	/// <summary>
 	/// Adapter to <see cref="IResource"/> so a
@@ -30,18 +34,26 @@ namespace Castle.Facilities.NHibernateIntegration.Internal
 	/// </summary>
 	public class ResourceAdapter : IResource, IDisposable
 	{
-		private readonly ITransaction transaction;
+		private ITransaction transaction;
+        private FlushMode previousFlushMode;
+        private readonly ISession session;
+        private readonly IsolationLevel level;
+        private readonly bool isReadOnly;
 		private readonly bool isAmbient;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="ResourceAdapter"/> class.
+        /// Initializes a new instance of the <see cref="ResourceAdapter"/> class.
 		/// </summary>
-		/// <param name="transaction">The transaction.</param>
-		/// <param name="isAmbient"></param>
-		public ResourceAdapter(ITransaction transaction, bool isAmbient)
+		/// <param name="level">The isolation level of the wrapped transaction</param>
+		/// <param name="session">The nhibernate session that the wrapped transaction will be started on</param>
+		/// <param name="isAmbient">Is th transaction ambient</param>
+		/// <param name="isReadOnly">Is the transaction readonly?</param>
+		public ResourceAdapter(IsolationLevel level, ISession session, bool isAmbient, bool isReadOnly)
 		{
-			this.transaction = transaction;
+            this.level = level;
+            this.session = session;
 			this.isAmbient = isAmbient;
+            this.isReadOnly = isReadOnly;
 		}
 
 		/// <summary>
@@ -50,7 +62,12 @@ namespace Castle.Facilities.NHibernateIntegration.Internal
 		/// </summary>
 		public void Start()
 		{
-			transaction.Begin();
+            transaction = session.BeginTransaction(level);
+            if (isReadOnly)
+            {
+                previousFlushMode = session.FlushMode;
+                session.FlushMode = FlushMode.Never;
+            }
 		}
 
 		/// <summary>
@@ -60,6 +77,10 @@ namespace Castle.Facilities.NHibernateIntegration.Internal
 		public void Commit()
 		{
 			transaction.Commit();
+            if (isReadOnly)
+            {
+                ResetFlushMode();
+            }
 		}
 
 		/// <summary>
@@ -70,8 +91,16 @@ namespace Castle.Facilities.NHibernateIntegration.Internal
 		{
 			//HACK: It was supossed to only a test but it fixed the escalated tx rollback issue. not sure if 
 			//		this the right way to do it (probably not).
-			if (!isAmbient)
-				transaction.Rollback();
+            if (!isAmbient)
+            {
+                transaction.Rollback();
+                // Not sure if this should join in with the hacks if clause?
+                if (isReadOnly)
+                {
+                    ResetFlushMode();
+                }
+            }
+
 		}
 
 		/// <summary>
@@ -81,5 +110,11 @@ namespace Castle.Facilities.NHibernateIntegration.Internal
 		{
 			transaction.Dispose();
 		}
+
+
+        private void ResetFlushMode()
+        {
+            session.FlushMode = previousFlushMode;
+        }
 	}
 }

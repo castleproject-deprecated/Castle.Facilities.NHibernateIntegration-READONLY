@@ -22,6 +22,7 @@ namespace Castle.Facilities.NHibernateIntegration.Tests.Transactions
 	using System;
 	using NHibernateIntegration.Components.Dao;
 	using Services.Transaction;
+    using NUnit.Framework;
 
 	[Transactional]
 	public class RootService : NHibernateGenericDao
