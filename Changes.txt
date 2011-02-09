@@ -1,3 +1,22 @@
+Release 2.0
+
+- Updated to NHibernate 3.0
+- Updated to Core and Windsor 2.5.2
+
+- NHibernate Facility Event Listeners Configuration (Facilities-99)
+- XmlConfigurationBuilder for NHibernate's own configuration file (Facilities-106)
+- Lazy Session Factory Inititialization (Facilities-112)
+- Facility needs a way to modify Configuration instance (Facilities-113)
+- Persistent Configuration Builder (Facilities-116)
+- IConfigurationBuilder for Individual factories. (Facilities-119)
+- Support Stateless Session in NHibernate Facility (Facilities-142)
+- Derive the filename from session factory ID or alias when not explicitly specified. (Facilities-117)
+- Derive dependant files from the <assemblies></assemblies> node entries (common usage) when not explicitly specified.(Facilities-117)
+- Fluent Configuration initial support
+
+- Fixed: DefaultSessionManager should remove session from session store if transaction enlistment fails (Facilities-103)
+- Fixed: Transaction RespourceAdapter needs to implement IDisposable (Facilities-129)
+
 Version beta 3
 
 - Applied David Bachmann's patch fixing FACILITIES-88
