@@ -1,7 +1,9 @@
-Release 2.0
+2.0 RC
+==============
 
 - Updated to NHibernate 3.0
-- Updated to Core and Windsor 2.5.2
+- Updated to Core 2.5.2 and Windsor 2.5.3
+- Updated to Services Tx 2.5.0 and Auto Tx 2.5.1
 
 - NHibernate Facility Event Listeners Configuration (Facilities-99)
 - XmlConfigurationBuilder for NHibernate's own configuration file (Facilities-106)
@@ -17,7 +19,8 @@ Release 2.0
 - Fixed: DefaultSessionManager should remove session from session store if transaction enlistment fails (Facilities-103)
 - Fixed: Transaction RespourceAdapter needs to implement IDisposable (Facilities-129)
 
-Version beta 3
+Beta 3
+===============
 
 - Applied David Bachmann's patch fixing FACILITIES-88
   "Remove NH Facility dependency on NHibernate.Mapping.Attribute.dll"
@@ -66,15 +69,17 @@ Version beta 3
 - The NH Facility will always look up for a component "nhibernate.sessionfactory.interceptor" and 
   associate the instance with the Configuration.Interceptor before creating the session factories
 
-Version beta 2
-
+Beta 2
+===============
 - Completely rewritten
 
-Version beta 1
+Beta 1
+===============
 
 - Test cases simplified by the introduction of facilityconfig.xml
 
-Alpha Version 1.0.0
+Alpha 1
+===============
 - First release
 
 Future modifications - after the first release - shall be tracked in this file
